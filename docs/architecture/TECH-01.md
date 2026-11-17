@@ -1,7 +1,7 @@
 # TECH-01. Техническая архитектура
 
 ## Стек
-Go modular monolith, PostgreSQL 16+, Godot 4.x Android landscape, 3D isometric, HTTPS JSON API + WebSocket. Монорепозиторий: `server/`, `economy/`, `client/`, `assets/`, `contracts/`, `tools/`, `docs/`.
+Go modular monolith, PostgreSQL 16+, Godot 4.x Android landscape, 3D isometric, HTTPS JSON API + WebSocket. Монорепозиторий: `server/`, `economy/`, `client/`, `assets/`, `contracts/`, `tools/`, `docs/`. Состав и проверка каркаса — `docs/architecture/MONOREPO-01.md`, манифест `contracts/monorepo/manifest.json`.
 
 ## Сервер
 Слои: transport → application → domain → repository. Домен: identity, company, world, construction, production, inventory, market, contracts, logistics, population, labor, finance, banking, simulation, events. `net/http`, `pgx`, SQL-миграции, JSON-логи, health/readiness, graceful shutdown. Все критические операции транзакционные.

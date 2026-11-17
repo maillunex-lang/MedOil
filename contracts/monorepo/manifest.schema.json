@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://industrial-empire.local/contracts/monorepo/manifest.schema.json",
+  "title": "Industrial Empire monorepo manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "repository",
+    "modules",
+    "auxiliary_paths",
+    "required_root_entries",
+    "network_invariants",
+    "economic_invariants"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "minLength": 3
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 7,
+      "items": { "$ref": "#/$defs/module" }
+    },
+    "auxiliary_paths": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/auxiliary" }
+    },
+    "required_root_entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "network_invariants": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "economic_invariants": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "$defs": {
+    "module": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "description", "task_stream"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "description": { "type": "string", "minLength": 1 },
+        "task_stream": {
+          "type": "string",
+          "pattern": "^[A-Z][0-9]?$|^S0$"
+        }
+      }
+    },
+    "auxiliary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "description"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}
