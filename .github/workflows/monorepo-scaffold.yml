@@ -13,5 +13,7 @@ jobs:
           python-version: '3.11'
       - name: Unit tests (monorepo manifest)
         run: python3 -m unittest discover -s contracts/monorepo -p 'test_*.py' -v
+      - name: Unit tests (economic types)
+        run: python3 -m unittest discover -s contracts/economy -p 'test_*.py' -v
       - name: Validate on-disk scaffold
         run: python3 contracts/monorepo/validate.py

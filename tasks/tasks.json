@@ -10,9 +10,9 @@
       "stream": "S0",
       "depends_on": [],
       "scope": "contracts/**; docs/architecture/**; .github/**; AGENTS.md",
-      "status": "planned",
-      "pr": null,
-      "merge_sha": null,
+      "status": "done",
+      "pr": 3,
+      "merge_sha": "8e193a3b2d094c71fab4ceac80d7faddb0915eb7",
       "acceptance": "Реализовать «Каркас монорепозитория» по GDD/TECH-01, добавить релевантные позитивные и негативные тесты, не нарушить денежные, складские и сетевые инварианты.",
       "executor_prompt": "Industrial Empire S0-01: Каркас монорепозитория. Прочитай AGENTS.md, утверждённые решения, GDD и TECH-01. Работай только в contracts/**; docs/architecture/**; .github/**; AGENTS.md. Зависимости: нет. Реализуй задачу полностью, добавь тесты, открой PR; не отмечай done до merge. VPS не трогай."
     },
