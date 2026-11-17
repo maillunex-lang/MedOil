@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "project": "Industrial Empire",
+  "repository": "maillunex-lang/MedOil",
+  "modules": [
+    {
+      "id": "server",
+      "path": "server",
+      "description": "Go modular monolith: HTTPS API, WebSocket, PostgreSQL",
+      "task_stream": "A"
+    },
+    {
+      "id": "economy",
+      "path": "economy",
+      "description": "Reference economy models and golden tests",
+      "task_stream": "B"
+    },
+    {
+      "id": "client",
+      "path": "client",
+      "description": "Godot 4.x Android client (3D isometric)",
+      "task_stream": "C"
+    },
+    {
+      "id": "assets",
+      "path": "assets",
+      "description": "Game and 3D assets with asset_id and LOD",
+      "task_stream": "D"
+    },
+    {
+      "id": "contracts",
+      "path": "contracts",
+      "description": "Shared JSON schemas and monorepo manifest",
+      "task_stream": "S0"
+    },
+    {
+      "id": "tools",
+      "path": "tools",
+      "description": "Task planner and developer tooling",
+      "task_stream": "S0"
+    },
+    {
+      "id": "docs",
+      "path": "docs",
+      "description": "GDD, architecture, QA handoff",
+      "task_stream": "S0"
+    }
+  ],
+  "auxiliary_paths": [
+    {
+      "path": "tasks",
+      "description": "Task registry tasks/tasks.json"
+    },
+    {
+      "path": ".github",
+      "description": "GitHub Actions CI and auto-merge"
+    }
+  ],
+  "required_root_entries": ["README.md", "AGENTS.md"],
+  "network_invariants": [
+    "api_prefix:/api/v1",
+    "websocket_path:/api/v1/ws",
+    "idempotency_header:Idempotency-Key"
+  ],
+  "economic_invariants": [
+    "money_integer_kopeks",
+    "mass_integer_grams",
+    "volume_integer_milliliters",
+    "energy_integer_watt_hours",
+    "no_float_for_money_or_inventory"
+  ]
+}
