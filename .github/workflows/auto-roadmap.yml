@@ -1,0 +1,47 @@
+name: Mark merged task done
+on:
+  pull_request:
+    types: [closed]
+permissions:
+  contents: write
+concurrency:
+  group: roadmap-main
+  cancel-in-progress: false
+jobs:
+  mark-done:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Update task and roadmap
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: |
+          python - <<'PY'
+          import os, re, subprocess
+          match = re.match(r'^\[(S0-\d{2}|[ABCDEI]\d{2})\] ', os.environ['PR_TITLE'])
+          if not match:
+              print("Non-task PR, skip")
+          else:
+              subprocess.run(["python", "tools/work_plan.py", "set", match.group(1), "done", "--pr", os.environ["PR_NUMBER"], "--sha", os.environ["MERGE_SHA"]], check=True)
+          PY
+      - name: Commit status if changed
+        run: |
+          if git diff --quiet -- tasks/tasks.json docs/ROADMAP.md; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tasks/tasks.json docs/ROADMAP.md
+          git commit -m "roadmap: mark merged task done"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 2
+          done
+          exit 1

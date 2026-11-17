@@ -1,22 +1,21 @@
 # Industrial Empire / MedOil
 
-Постоянная экономическая MMO-стратегия для Android. Рабочий репозиторий `maillunex-lang/MedOil`; название игры: **Industrial Empire**.
+Постоянная экономическая MMO для Android (Godot 4.x + Go + PostgreSQL + 3D).
 
-## Продолжение работы любым ИИ
+## Как любому ИИ продолжить игру
 
-1. Прочитать `AGENTS.md`, `docs/decisions/APPROVED.md` и GDD нужной задачи.
-2. Выполнить `python tools/work_plan.py validate` и `python tools/work_plan.py next`.
-3. Выполнить первую доступную задачу, не пропуская зависимости.
-4. Проверить тесты, сделать commit и PR. **Не ставить done в незаслитой ветке.**
-5. После слияния PR в main отметить задачу командой `python tools/work_plan.py set ID done --pr NUMBER --sha MERGE_SHA`, закоммитить изменение статуса и `docs/ROADMAP.md`.
-6. Если нет возможности подтвердить слияние, оставить задачу `in_progress` и передать ссылку PR следующему исполнителю.
+```bash
+python tools/work_plan.py validate
+python tools/work_plan.py next
+python tools/work_plan.py show S0-01
+```
 
-## Содержание
-- `docs/gdd/01_*.md` ... `11_*.md`: проект игры.
-- `docs/decisions/APPROVED.md`: утверждённые решения.
-- `docs/architecture/TECH-01.md`: техническая архитектура.
-- `tasks/tasks.json`: единственный источник статусов и зависимостей.
-- `docs/ROADMAP.md`: генерируемая дорожная карта.
-- `tools/work_plan.py`: проверка, выдача, фиксация статуса.
+1. Прочитай `AGENTS.md` и соответствующий GDD.
+2. Возьми первую доступную задачу без открытого PR.
+3. Реализуй и открой PR `[ID] Название`.
+4. GitHub Actions автоматически сливает обычные PR после минимальных проверок и отмечает задачу `done` после слияния.
+5. Новый исполнитель начинает со следующей задачи. Не нужно вручную обновлять ROADMAP.md.
 
-**VPS не трогать без отдельного разрешения.** Исторические GDD содержат проектные параметры, не реализованный функционал.
+**Ссылки:** `docs/gdd/` (11 глав), `docs/decisions/APPROVED.md`, `docs/architecture/TECH-01.md`, `tasks/tasks.json`, `docs/ROADMAP.md`.
+
+**Важно:** автоматика зависит от разрешений GitHub Actions и настроек защиты ветки. Никакого автоматического развёртывания на VPS.
