@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://industrial-empire.local/contracts/economy/rational.schema.json",
+  "title": "Rational rate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["numerator", "denominator"],
+  "properties": {
+    "numerator": { "type": "integer" },
+    "denominator": { "type": "integer", "minimum": 1 }
+  }
+}

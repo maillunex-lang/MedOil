@@ -19,7 +19,7 @@ Go modular monolith, PostgreSQL 16+, Godot 4.x Android landscape, 3D isometric, 
 `/api/v1/ws`, потоки company/city/market/chunk/shipment, события с event_id, stream, sequence, schema_version, payload. Проверка прав, replay по курсору, fallback на snapshot. Outbox в той же транзакции, что и изменение состояния.
 
 ## Экономика
-Эталонные модели и golden-тесты в `economy/`; серверные транзакции в `server/`. Деньги копейки, массы граммы, жидкости мл, энергия Wh, ставки базисные пункты/рациональные. Проверка переполнения, детерминированные округления, двойная запись, учёт эмиссии.
+Эталонные модели и golden-тесты в `economy/`; серверные транзакции в `server/`. Деньги копейки, массы граммы, жидкости мл, энергия Wh, ставки базисные пункты/рациональные. JSON-контракты типов: `contracts/economy/`, см. ECONOMIC-TYPES-01.md. Проверка переполнения, детерминированные округления, двойная запись, учёт эмиссии.
 
 ## Android и 3D
 Godot: network/state/world/ui, потоковые чанки, кэш, LOD, MultiMesh, safe area, pinch zoom, pan. 20×20 м клетка и 32×32 клетки чанк являются стартовыми параметрами. Ресурсы с asset_id, footprint, visual variants и LOD.

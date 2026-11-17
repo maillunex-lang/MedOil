@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kinds": [
+    {
+      "id": "money_kopeks",
+      "unit": "kopek",
+      "signed": true,
+      "min": -9223372036854775808,
+      "max": 9223372036854775807,
+      "description": "Money in integer kopeks (1/100 ruble)"
+    },
+    {
+      "id": "mass_grams",
+      "unit": "gram",
+      "signed": false,
+      "min": 0,
+      "max": 9223372036854775807,
+      "description": "Mass in grams"
+    },
+    {
+      "id": "volume_milliliters",
+      "unit": "milliliter",
+      "signed": false,
+      "min": 0,
+      "max": 9223372036854775807,
+      "description": "Liquid volume in milliliters"
+    },
+    {
+      "id": "energy_watt_hours",
+      "unit": "watt_hour",
+      "signed": false,
+      "min": 0,
+      "max": 9223372036854775807,
+      "description": "Energy in watt-hours"
+    },
+    {
+      "id": "count_pieces",
+      "unit": "piece",
+      "signed": false,
+      "min": 0,
+      "max": 9223372036854775807,
+      "description": "Countable items in whole pieces"
+    },
+    {
+      "id": "server_tick",
+      "unit": "tick",
+      "signed": false,
+      "min": 0,
+      "max": 9223372036854775807,
+      "description": "Monotonic server scheduling tick"
+    },
+    {
+      "id": "game_tick",
+      "unit": "tick",
+      "signed": false,
+      "min": 0,
+      "max": 9223372036854775807,
+      "description": "Authoritative in-world game tick"
+    }
+  ]
+}

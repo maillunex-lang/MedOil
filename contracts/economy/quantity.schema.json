@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://industrial-empire.local/contracts/economy/quantity.schema.json",
+  "title": "Quantity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "amount"],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "money_kopeks",
+        "mass_grams",
+        "volume_milliliters",
+        "energy_watt_hours",
+        "count_pieces",
+        "server_tick",
+        "game_tick"
+      ]
+    },
+    "amount": {
+      "type": "integer"
+    }
+  }
+}
