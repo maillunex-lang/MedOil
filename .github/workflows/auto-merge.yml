@@ -1,0 +1,40 @@
+name: Automatic PR merge
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: auto-merge-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  merge:
+    if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate roadmap
+        run: |
+          python tools/work_plan.py validate
+          python tools/work_plan.py build
+          git diff --exit-code -- docs/ROADMAP.md
+      - name: Merge task PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          GH_REPO: ${{ github.repository }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          if ! printf '%s' "$PR_TITLE" | grep -Eq '^\[(S0-[0-9]{2}|[ABCDEI][0-9]{2})\] '; then
+            echo "No task ID in PR title. Skip auto-merge."
+            exit 0
+          fi
+          gh pr merge "$PR_NUMBER" --repo "$GH_REPO" --squash --match-head-commit "$HEAD_SHA"
